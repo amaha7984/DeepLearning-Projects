@@ -1,5 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
+import timm
 
 class SimpleCNNClassifier(nn.Module):
     def __init__(self, num_classes):
@@ -18,8 +19,27 @@ class SimpleCNNClassifier(nn.Module):
         x = self.fc2(x)
         return x
 
+class Mobilev3Classifier(nn.Module):
+    def __init__(self, num_classes=53):
+        super(Mobilev3Classifier, self).__init__()
+        self.base_model = timm.create_model('mobilenetv3_large_100', pretrained=True)
+        self.features = nn.Sequential(*list(self.base_model.children())[:-1])  # Removing classifier
+
+        feature_out = 1280  # This is MobileNetV3's last feature dimension
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(feature_out, num_classes)
+        )
+
+    def forward(self, x):
+        x = self.features(x)
+        x = self.classifier(x)
+        return x
+
+
 MODEL_REGISTRY = {
     'simple_cnn': SimpleCNNClassifier,
+    'mobilenetv3': Mobilev3Classifier,
 }
 
 def get_model(name, num_classes):
