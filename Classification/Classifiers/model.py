@@ -1,6 +1,9 @@
 import torch.nn as nn
 import torch.nn.functional as F
 import timm
+from einops.layers.torch import Rearrange
+from einops import repeat
+from torch import Tensor
 
 class SimpleCNNClassifier(nn.Module):
     def __init__(self, num_classes):
@@ -19,10 +22,68 @@ class SimpleCNNClassifier(nn.Module):
         x = self.fc2(x)
         return x
 
+#####################################################
+#Below is the implementation of ViTfromScratch Class
+
+class PatchEmbedding(nn.Module):
+    def __init__(self, in_channels, patch_size, emb_size):
+        super().__init__()
+        self.patch_size = patch_size
+        self.projection = nn.Sequential(
+            Rearrange('b c (h p1) (w p2) -> b (h w) (p1 p2 c)', p1=patch_size, p2=patch_size),
+            nn.Linear(patch_size * patch_size * in_channels, emb_size)
+        )
+
+    def forward(self, x: Tensor) -> Tensor:
+        x = self.projection(x)
+        return x
+
+class Attention(nn.Module):
+    def __init__(self, dim, n_heads, dropout):
+        super().__init__()
+        self.att = nn.MultiheadAttention(embed_dim=dim,
+                                         num_heads=n_heads,
+                                         dropout=dropout,
+                                         batch_first=True) 
+
+    def forward(self, x):
+        # x: [batch, seq_len, dim] because batch_first=True
+        attn_output, _ = self.att(x, x, x)  # Q=K=V=x
+        return attn_output
+
+class PreNorm(nn.Module):
+    def __init__(self, dim, fn):
+        super().__init__()
+        self.norm = nn.LayerNorm(dim)
+        self.fn = fn
+    def forward(self, x, **kwargs):
+        return self.fn(self.norm(x), **kwargs)
+
+class FeedForward(nn.Sequential):
+    def __init__(self, dim, hidden_dim, dropout = 0.):
+        super().__init__(
+            nn.Linear(dim, hidden_dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, dim),
+            nn.Dropout(dropout)
+        )
+
+class ResidualAdd(nn.Module):
+    def __init__(self, fn):
+        super().__init__()
+        self.fn = fn
+
+    def forward(self, x, **kwargs):
+        res = x
+        x = self.fn(x, **kwargs)
+        x += res
+        return x
+        
 class ViTfromScratch(nn.Module):
     def __init__(self, ch=3, img_size=224, patch_size=4, emb_dim=32,
                 n_layers=6, out_dim=53, dropout=0.1, heads=2): #out_dim=53, matching the number of classes
-        super(ViT, self).__init__()
+        super(ViTfromScratch, self).__init__()
 
         # Attributes
         self.channels = ch
@@ -69,6 +130,9 @@ class ViTfromScratch(nn.Module):
 
         # Output based on classification token
         return self.head(x[:, 0, :])
+
+#End of ViTfromScratch Class
+#####################################################
 
 class Mobilev3Classifier(nn.Module):
     def __init__(self, num_classes=53):
