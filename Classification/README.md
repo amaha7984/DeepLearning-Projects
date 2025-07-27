@@ -1,3 +1,5 @@
+# Different Classifiers Ranging from CNNs to ViTs
+
 - Run Training with:
 ```bash
 python3.9 train.py \
