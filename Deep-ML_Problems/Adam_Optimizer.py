@@ -15,7 +15,7 @@ def adam_optimizer(parameter, grad, m, v, t, learning_rate=0.001, beta1=0.9, bet
     v_bt = v_t/(1-beta2**t)
     v_bt = torch.tensor(v_bt, dtype=torch.float32)
     
-    parameter = parameter - learning_rate * (m_bt / ((torch.sqrt(v_bt)).item() + epsilon))
+    parameter = parameter - learning_rate * (m_bt / ((torch.sqrt(v_bt)) + epsilon))
     return np.round(parameter,5), np.round(m_t,5), np.round(v_t,5)
     
 
