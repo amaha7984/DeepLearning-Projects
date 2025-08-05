@@ -34,6 +34,10 @@ def compute_qkv(X, W_q, W_k, W_v):
     V = np.matmul(X, W_v)
 
     return Q, K, V
+    
+def softmax(x: np.ndarray):
+    exp_val = np.exp(x - np.max(x, axis=-1, keepdims=True))
+    return exp_val / np.sum(exp_val, axis=-1, keepdims = True)
 
 
 def self_attention(Q:np.ndarray, K:np.ndarray, V:np.ndarray):
@@ -41,11 +45,8 @@ def self_attention(Q:np.ndarray, K:np.ndarray, V:np.ndarray):
     k = np.size(K, -1)
 
     val = np.matmul(Q, K.T) / np.sqrt(k)
-    exp_val = np.exp(val - np.max(val, axis=-1, keepdims=True)) 
-    #incase large values in the matrix, we take the difference between the value and the largest 
-    # value in the given row and then apply exponential
-
-    scores = exp_val / np.sum(exp_val, axis=-1, keepdims=True)
+    
+    scores = softmax(val)
 
     attention_output = np.matmul(scores, V)
       
