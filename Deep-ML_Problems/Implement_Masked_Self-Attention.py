@@ -3,8 +3,32 @@
 # Your task is to compute masked self-attention using query (Q), key (K), value (V) matrices and an attention mask.
 
 #------------------------------------------------------------------------------------------------------------------
-#Numpy Solution
+#PyTorch Solution
 
+import torch
+import torch.nn.functional as F
+def compute_qkv(X, W_q, W_k, W_v):
+    Q = torch.matmul(X, W_q)
+    K = torch.matmul(X, W_k)
+    V = torch.matmul(X, W_v)
+
+    return Q, K, V
+
+def self_attention(Q:torch.Tensor, K:torch.Tensor, V:torch.Tensor, mask: torch.Tensor):
+
+    k = K.size(-1)
+
+    val = torch.matmul(Q, K.T) / torch.sqrt(k)
+
+    masked_score = F.softmax(val + mask, dim=-1)
+
+    masked_attn = torch.matmul(masked_score, V)
+    return masked_attn
+
+    
+#------------------------------------------------------------------------------------------------------------------
+#Numpy Solution
+"""
 import numpy as np
 
 def compute_qkv(X: np.ndarray, W_q: np.ndarray, W_k: np.ndarray, W_v: np.ndarray):
@@ -25,3 +49,4 @@ def masked_attention(Q: np.ndarray, K: np.ndarray, V: np.ndarray, mask: np.ndarr
 
     masked_attn = np.matmul(masked_score, V)
     return masked_attn
+"""
