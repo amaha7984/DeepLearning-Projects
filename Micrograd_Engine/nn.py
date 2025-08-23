@@ -1,3 +1,4 @@
+#Credit: https://github.com/karpathy/micrograd
 import random
 from micrograd.engine import Value
 
