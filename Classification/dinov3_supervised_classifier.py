@@ -43,15 +43,18 @@ class DINOv3WithDWT(nn.Module):
         self.dwt = HaarTransform()
         self.use_all_bands = use_all_bands
         # DINOv3 backbone (no classification head)
-        # self.backbone = AutoModel.from_pretrained("facebook/dinov3-vits16-pretrain-lvd1689m")
-        self.backbone = AutoModel.from_pretrained("facebook/dinov3-vitb16-pretrain-lvd1689m")
-
+        REPO_DIR = "/aul/homes/amaha038/DeepLearning/Classification/dinov3"  # folder needs to be cloned
+        WEIGHTS  = "/aul/homes/amaha038/DeepLearning/Classification/dinov3/dinov3/weights/dinov3_vits16_pretrain_lvd1689m-08c60483.pth" 
+        self.backbone = torch.hub.load(
+            REPO_DIR, 'dinov3_vitb16', source='local', weights=WEIGHTS
+        ).eval()
 
         # hidden size of embeddings
         in_features = self.backbone.config.hidden_size
 
         # classification head
         self.classifier = nn.Linear(in_features * (4 if use_all_bands else 1), num_classes)
+
     def forward(self, x):
 
         Yl, xH, xV, xD = self.dwt(x)
