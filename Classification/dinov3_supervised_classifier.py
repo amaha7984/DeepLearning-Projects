@@ -5,7 +5,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from torchvision.datasets import ImageFolder
-from transformers import AutoImageProcessor, AutoModel
+# from transformers import AutoImageProcessor, AutoModel
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from tqdm import tqdm
 import matplotlib.pyplot as plt
@@ -36,47 +36,66 @@ class HaarTransform(nn.Module):
             xD = F.interpolate(xD, size=(224, 224), mode='bilinear', align_corners=False)
             return Yl, xH, xV, xD
 
+# REPO_DIR = "/aul/homes/amaha038/DeepLearning/Classification/dinov3"  # folder needs to be cloned
+# WEIGHTS  = "/aul/homes/amaha038/DeepLearning/Classification/dinov3/dinov3/weights/dinov3_vits16_pretrain_lvd1689m-08c60483.pth" 
 # ======================== DINOv2 with DWT ========================
 class DINOv3WithDWT(nn.Module):
-    def __init__(self, num_classes=2, use_all_bands=True):
+    def __init__(self, num_classes=2, use_all_bands=True,
+                 repo_dir="/aul/homes/amaha038/DeepLearning/Classification/dinov3",
+                 weights="/aul/homes/amaha038/DeepLearning/Classification/dinov3/dinov3/weights/dinov3_vits16_pretrain_lvd1689m-08c60483.pth",
+                 stats="LVD", freeze_backbone=True):
         super().__init__()
         self.dwt = HaarTransform()
         self.use_all_bands = use_all_bands
-        # DINOv3 backbone (no classification head)
-        REPO_DIR = "/aul/homes/amaha038/DeepLearning/Classification/dinov3"  # folder needs to be cloned
-        WEIGHTS  = "/aul/homes/amaha038/DeepLearning/Classification/dinov3/dinov3/weights/dinov3_vits16_pretrain_lvd1689m-08c60483.pth" 
-        self.backbone = torch.hub.load(
-            REPO_DIR, 'dinov3_vitb16', source='local', weights=WEIGHTS
-        ).eval()
 
-        # hidden size of embeddings
-        in_features = self.backbone.config.hidden_size
+        # --- Hub backbone (choose the right entry + weights that match) ---
+        # e.g. 'dinov3_vitb16' with a vitb16 checkpoint; 'dinov3_vits16' for vits16, etc.
+        self.backbone = torch.hub.load(repo_dir, 'dinov3_vits16', source='local', weights=weights)
+        if freeze_backbone:
+            for p in self.backbone.parameters(): p.requires_grad = False
+            self.backbone.eval()
 
-        # classification head
-        self.classifier = nn.Linear(in_features * (4 if use_all_bands else 1), num_classes)
+        # --- normalization that matches the pretraining ---
+        if stats.upper() == "SAT":
+            self.mean, self.std = (0.496, 0.496, 0.496), (0.244, 0.244, 0.244)
+        else:  # LVD (web)
+            self.mean, self.std = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
+
+        # --- feature dim (Hub DINOv3 exposes embed_dim/num_features) ---
+        self.feat_dim = getattr(self.backbone, "embed_dim", None) or getattr(self.backbone, "num_features", None)
+        assert self.feat_dim is not None, "Cannot infer feature dim; ensure DINOv3 Hub model exposes embed_dim."
+
+        self.classifier = nn.Linear(self.feat_dim * (4 if use_all_bands else 1), num_classes)
+
+    def _norm(self, x):
+        mean = x.new_tensor(self.mean)[None,:,None,None]
+        std  = x.new_tensor(self.std )[None,:,None,None]
+        return (x - mean) / std
+
+    def _embed(self, x):
+        # Prefer forward_features → class token
+        if hasattr(self.backbone, "forward_features"):
+            out = self.backbone.forward_features(x)
+            if isinstance(out, dict) and "x_norm_clstoken" in out:
+                return out["x_norm_clstoken"]     # [B, feat_dim]
+        # Fallback: some hub entries return pooled features directly
+        y = self.backbone(x)
+        if torch.is_tensor(y) and y.dim() == 2:
+            return y
+        raise RuntimeError("Unexpected backbone output; forward_features lacks 'x_norm_clstoken' and forward() didn't return [B, D].")
 
     def forward(self, x):
-
         Yl, xH, xV, xD = self.dwt(x)
-
-        feat_Yl = self.backbone(pixel_values=Yl).pooler_output
-        print(f"[BACKBONE] Yl out: {feat_Yl.shape}")
-
+        Yl = self._norm(Yl)
+        feat_Yl = self._embed(Yl)
         if self.use_all_bands:
-            feat_xH = self.backbone(pixel_values=xH).pooler_output
-            feat_xV = self.backbone(pixel_values=xV).pooler_output
-            feat_xD = self.backbone(pixel_values=xD).pooler_output
-            # print(f"[BACKBONE] xH={feat_xH.shape}, xV={feat_xV.shape}, xD={feat_xD.shape}")
-            features = torch.cat([feat_Yl, feat_xH, feat_xV, feat_xD], dim=1)
-            print(f"[CONCAT] Combined feature shape: {features.shape}")
+            feats = torch.cat([feat_Yl,
+                               self._embed(self._norm(xH)),
+                               self._embed(self._norm(xV)),
+                               self._embed(self._norm(xD))], dim=1)
         else:
-            features = feat_Yl
-
-        logits = self.classifier(features)
-        if not hasattr(self, "_dbg_once"):
-            print(f"[DEBUG] Logits: {logits.shape}")  # expect (B, {num_classes})
-            self._dbg_once = True
-        return logits
+            feats = feat_Yl
+        return self.classifier(feats)
 
 # ======================== Config ========================
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -96,7 +115,7 @@ transform = transforms.Compose([
     transforms.Resize(256),
     transforms.CenterCrop(224),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.5]*3, std=[0.5]*3),
+    transforms.Normalize(mean=(0.485,0.456,0.406), std=(0.229,0.224,0.225)),
 ])
 
 # ======================== DataLoaders ========================
