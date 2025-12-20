@@ -7,3 +7,5 @@ We have implemented ResNet50 and various Vision Transformers (ViTs) in a transfe
 ### Compute Mean and Standard Deviation
 It is recommended to compute the mean and standard deviation of the dataset before training. We have provided a Python script for this purpose. You can find it [here](compute_mean_standarddeviation.py).
 
+## Solutions to Deep Learning Questions (https://www.deep-ml.com/)
+
