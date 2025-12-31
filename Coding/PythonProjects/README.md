@@ -8,3 +8,10 @@
                                                 I live in Miami."""
 - Note with triple quotation mark, if we have line break then it will also appear same in the printed statement.
 
+#### Combining Strings
+See file "strings.py"
+
+#### String length: len keyword can be used to print the number of characters in string
+See file "strings.py"
+
+
