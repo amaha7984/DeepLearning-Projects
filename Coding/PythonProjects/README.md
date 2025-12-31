@@ -11,7 +11,11 @@
 #### Combining Strings
 See file "strings.py"
 
-#### String length: len keyword can be used to print the number of characters in string
+#### String length: len() keyword can be used to print the number of characters in string
 See file "strings.py"
+
+#### Converting to string: str() can be used to convert other types to strings
+See file "strings.py" 
+
 
 
