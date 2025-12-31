@@ -12,3 +12,7 @@ print(what)
 # string length
 #len()
 print(len(first_name))
+
+#Converting other types to string
+age = 28
+print("I am " + str(age) + " years old")
