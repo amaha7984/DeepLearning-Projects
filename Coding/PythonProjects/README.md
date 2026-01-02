@@ -17,5 +17,8 @@ See file "strings.py"
 #### Converting to string: str() can be used to convert other types to strings
 See file "strings.py" 
 
+### Booleans: True and False Values for decisions
+
+
 
 
