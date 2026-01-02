@@ -19,6 +19,14 @@ See file "strings.py"
 
 ### Booleans: True and False Values for decisions
 
+#### Creating Booleans
+- Direct Assignment
+  - is_generated = True
+- From Comparisons
+  - image_size = 256
+  - valid_size = image_size == 256
+
+
 
 
 
