@@ -30,8 +30,15 @@ See file "strings.py"
   - valid_size = image_size == 256
 
 
-## If statements
+## Control Flow
+### If statements
 See file "if_else_statements.py"
+
+### Loops
+#### For Loops
+- Python start index is 0. This is called “zero-indexing”
+- See an example file "loops.py"
+
 
 
 
