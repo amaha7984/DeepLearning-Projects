@@ -17,6 +17,9 @@ See file "strings.py"
 #### Converting to string: str() can be used to convert other types to strings
 See file "strings.py" 
 
+#### f-Strings 
+See file "strings.py"
+
 ### Booleans: True and False Values for decisions
 
 #### Creating Booleans
@@ -25,6 +28,7 @@ See file "strings.py"
 - From Comparisons
   - image_size = 256
   - valid_size = image_size == 256
+
 
 
 
