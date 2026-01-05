@@ -39,6 +39,11 @@ See file "if_else_statements.py"
 - Python start index is 0. This is called “zero-indexing”
 - See an example file "loops.py"
 
+## Data Structures
+### Lists
+See "lists.py" for all loops' functionalities
+
+
 
 
 
