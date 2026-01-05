@@ -30,6 +30,11 @@ See file "strings.py"
   - valid_size = image_size == 256
 
 
+## If statements
+See file "if_else_statements.py"
+
+
+
 
 
 
