@@ -26,3 +26,12 @@ person = {"name": "Alice", "age": 30, "city": "New York"}
 print(person.keys())   #prints: dict_keys(['name', 'age', 'city'])
 print(person.values()) #prints: dict_values(['Alice', 30, 'New York'])
 print(person.items())  #prints: dict_items([('name', 'Alice'), ('age', 30), ('city', 'New York')])
+
+##########################################
+# Nested dictionaries
+person = {
+    "Arpan": {"age": 28, "grade": "A"},
+    "bob": {"age": 29, "grade": "A"}
+}
+
+print(person["Arpan"]["age"])
