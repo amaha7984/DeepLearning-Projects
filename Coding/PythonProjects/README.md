@@ -47,6 +47,11 @@ See "lists.py" for all loops' functionalities
 - Store data with key-value pairs
 - See dictionaries.py for detailed information on dictionaries methods and usage
 
+### Tuples
+- Similar to lists and can be instantiated with ()
+- Tuples are immutable
+
+
 
 
 
