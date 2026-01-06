@@ -1,4 +1,6 @@
 # This folder contains the information about coding in Python
+# Credits: https://python.datalumina.com/basics
+# Thanks to Dave Ebbelaar
 
 
 ## Data types
@@ -55,6 +57,7 @@ See "lists.py" for all loops' functionalities
 - Sets are collections that only store unique values. They automatically remove duplicates.
 - Sets can be created with set() or with curly braces {}
 - Important note: use curly braces to create a set when it has values
+
 
 
 
