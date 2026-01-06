@@ -43,6 +43,12 @@ See file "if_else_statements.py"
 ### Lists
 See "lists.py" for all loops' functionalities
 
+### Dictionaries
+- Store data with key-value pairs
+- See dictionaries.py for detailed information on dictionaries methods and usage
+
+
+
 
 
 
