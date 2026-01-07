@@ -58,6 +58,15 @@ See "lists.py" for all loops' functionalities
 - Sets can be created with set() or with curly braces {}
 - Important note: use curly braces to create a set when it has values
 
+## Functions
+#### Defining Functions
+- Use def keyword to define function
+- Use lowercase letters, separate words with underscores, and be descriptive about what it does
+#### Parameters
+- We can pass data into functions with parameters
+- See functions.py for detailed information on Functions
+
+
 
 
 
