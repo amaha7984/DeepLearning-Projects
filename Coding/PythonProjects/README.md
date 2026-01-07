@@ -66,6 +66,10 @@ See "lists.py" for all loops' functionalities
 - We can pass data into functions with parameters
 - See functions.py for detailed information on Functions
 
+#### Return Values
+- Get results back from functions 
+- See functions.py for more information
+
 
 
 
