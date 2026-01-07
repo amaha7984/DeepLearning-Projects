@@ -32,7 +32,7 @@ def introduce(name, age):
     print(f"My name is {name}. I am {age} years old.")
 
 introduce("Arpan Mahara", 28)
-"""
+
 
 # --------Default values ---------#
 # Keep optional value first 
@@ -57,3 +57,16 @@ create_profile("Alice", 25, "NYC")
 
 # Keyword arguments (order doesn't matter)
 create_profile(city="NYC", age=25, name="Alice")
+"""
+###########################################################
+#------------return values------------#
+def multiplication(a, b):
+    return a * b
+
+print(multiplication(2, 3))
+
+# returning multiple values
+def get_min_max(numbers):
+    return min(numbers), max(numbers) #Note: min and maximum are predefined functions
+
+print(get_min_max([1, 3, 4, 8]))
