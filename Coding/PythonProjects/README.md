@@ -80,7 +80,12 @@ See "lists.py" for all loops' functionalities
   - Package: A folder containing multiple modules
   - Function: A reusage block of code
   - Class: A blueprint of creating objects
+
+### Where to find packages
+- [PyPI](https://pypi.org/)
+- [awesome-python](https://github.com/vinta/awesome-python)
     
+
 
 
 
