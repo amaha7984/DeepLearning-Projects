@@ -70,6 +70,19 @@ See "lists.py" for all loops' functionalities
 - Get results back from functions 
 - See functions.py for more information
 
+## Packages 
+- There are two types:
+  - Built-in: Come with Python (no installation needed)
+  - External: Need to install first with pip
+
+- Few Terminologies:
+  - Module: A single Python file (like math.py)
+  - Package: A folder containing multiple modules
+  - Function: A reusage block of code
+  - Class: A blueprint of creating objects
+    
+
+
 
 
 
