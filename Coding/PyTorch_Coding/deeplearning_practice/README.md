@@ -6,3 +6,11 @@ Use `torch.tensor()` to convert Python data (int, float, list, etc.) into a PyTo
 ```python
 import torch
 x = torch.tensor(x)
+### Converting to specific tensor data type:
+```python
+x = torch.tensor(x, dtype=torch.float)
+- Other common datatypes:
+- torch.int
+- torch.long
+- torch.float32
+- torch.float64
