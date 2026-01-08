@@ -17,3 +17,10 @@ x = torch.tensor(x, dtype=torch.float)
 - torch.float32
 - torch.float64
 
+### Sigmoid activation
+\[
+\sigma(x) = \frac{1}{1 + e^{-x}}
+\]
+
+
+
