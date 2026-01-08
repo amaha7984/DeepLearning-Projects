@@ -22,5 +22,9 @@ x = torch.tensor(x, dtype=torch.float)
 \sigma(x) = \frac{1}{1 + e^{-x}}
 \]
 
+### Softmax Activation Function
+\(\text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}}\)
+
+
 
 
