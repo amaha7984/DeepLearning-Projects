@@ -25,7 +25,7 @@ for i, j in zip(inputs, weights):
 
 final_output = outputs + bias
 print(final_output)
-"""
+
 
 ################################################
 #----------Three neurons and four weights----------------#
@@ -46,6 +46,26 @@ for neuron_weights, neuron_bias in zip(weights, biases):
     neuron_output += neuron_bias
     layer_outputs.append(neuron_output)
 print(layer_outputs)
+"""
+
+################################################
+#----------Three neurons and four weights with numpy dot product----------------#
+
+import numpy as np
+
+inputs = [1, 2, 3, 2.5] #shape is (4,)
+
+weights = [[0.2, 0.8, -0.5, 1.0],  #shape is (3, 4)
+           [0.5, -0.91, 0.26, -0.5],
+           [-0.26, -0.27, 0.17, 0.87]]
+
+biases = [2, 3, 0.5]
+
+print(np.dot(weights, inputs) + biases)
+
+
+
+
 
 
     
