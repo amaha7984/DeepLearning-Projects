@@ -107,12 +107,23 @@ class Relu_Activation:
     def forward(self, numbers):
         self.output = np.maximum(0, numbers)
 
-layer1 = Layer_Dense(2, 5)
+class Softmax_Activation:
+    def forward(self, inputs):
+        exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
+        probabilities = exp_values/np.sum(exp_values, axis=1, keepdims=True)
+        self.output = probabilities
+
+
+layer1 = Layer_Dense(2, 3)
+layer2 = Layer_Dense(3, 3) # we have three classes
 
 relu1 = Relu_Activation()
+softmax = Softmax_Activation()
 
 layer1.forward(X)
 # print(layer1.output)
 relu1.forward(layer1.output)
-print(relu1.output)
+layer2.forward(relu1.output)
+softmax.forward(layer2.output)
+print(softmax.output[:5])
 
