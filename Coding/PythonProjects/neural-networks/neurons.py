@@ -82,17 +82,18 @@ output = np.dot(inputs, np.array(weights).T) + biases
 print(output)
 
 """
-
 ################################################
-#----------Layers and Objects----------------#
+#----------Layers and Objects with Hidden Layer Activation Function----------------#
 
 import numpy as np 
+import nnfs #pip install nnfs
+from nnfs.datasets import spiral_data 
+
+nnfs.init()
 
 np.random.seed(0)
 
-X = [[1, 2, 3, 2.5],
-     [2.0, 5.0, -1.0, 2.0],
-     [-1.5, 2.7, 3.3, -0.8]]
+X, y = spiral_data(100, 3)  
 
 class Layer_Dense:
     def __init__(self, n_inputs, n_neurons):
@@ -102,10 +103,16 @@ class Layer_Dense:
     def forward(self, inputs):
         self.output =  (np.dot(inputs, self.weights)) + self.biases
 
-layer1 = Layer_Dense(4, 5)
-layer2 = Layer_Dense(5, 2)
+class Relu_Activation:
+    def forward(self, numbers):
+        self.output = np.maximum(0, numbers)
+
+layer1 = Layer_Dense(2, 5)
+
+relu1 = Relu_Activation()
 
 layer1.forward(X)
-print(layer1.output)
-layer2.forward(layer1.output)
-print(layer2.output)
+# print(layer1.output)
+relu1.forward(layer1.output)
+print(relu1.output)
+
