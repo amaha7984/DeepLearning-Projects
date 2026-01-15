@@ -25,8 +25,28 @@ x = torch.tensor(x, dtype=torch.float)
 ### Softmax Activation Function
 \(\text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}}\)
 
-### ReLU Activation Function
-ReLU(X) = 0 if X<=0, else X
+### ReLU Activation
+\[
+\text{ReLU}(x) = \max(0, x)
+\]
+Piecewise form:
+\[
+\text{ReLU}(x) =
+\begin{cases}
+0, & x \le 0 \\
+x, & x > 0
+\end{cases}
+\]
+
+### Tanh Activation
+\[
+\tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}}
+\]
+Equivalent form:
+\[
+\tanh(x) = \frac{2}{1 + e^{-2x}} - 1
+\]
+
 
 
 
