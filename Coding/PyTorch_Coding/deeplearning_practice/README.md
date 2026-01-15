@@ -25,6 +25,10 @@ x = torch.tensor(x, dtype=torch.float)
 ### Softmax Activation Function
 \(\text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}}\)
 
+### ReLU Activation Function
+ReLU(X) = 0 if X<=0, else X
+
+
 
 
 
