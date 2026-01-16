@@ -18,3 +18,7 @@
 - Example of Creating Hash set: 
   - hs = {1, 2, 3, 4, 5}
   - hs1 = set([1, 2, 3, 3, 4])
+- Basic Operation:
+  - let's say a hasset, hset = set([1, 2, 3, 3, 4])
+  - Addition with 'hset.add(5)'
+  - Removable with 'hset.remove(2)'
