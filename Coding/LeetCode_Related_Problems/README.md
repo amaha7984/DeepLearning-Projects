@@ -1,5 +1,3 @@
-## PyTorch Quick Notes
-
 ### Hashmaps
 - Dictionaries in Python
 - Allow search in O(1)
@@ -22,3 +20,36 @@
   - let's say a hasset, hset = set([1, 2, 3, 3, 4])
   - Addition with 'hset.add(5)'
   - Removable with 'hset.remove(2)'
+
+### Similarities with String and a List:
+- In Python, strings and lists support many of the same operations (indexing, len(), loops, slicing).
+
+- Indexing works the same:
+  - s = "609" → s[0] == '6'
+  - lst = [6, 0, 9 ] → lst[0] == 6
+
+- Length works the same: len(s) and len(lst)
+
+- Looping works the same:
+  - for c in s: ...
+  - for x in lst: ...
+
+- range(len(...)) + indexing works the same:
+  - for i in range(len(s)): s[i]
+  - for i in range(len(lst)): lst[i]
+
+- Slicing works similarly:
+  - s[1:3] returns a string
+  - lst[1:3] returns a list
+
+- Key difference: strings are immutable (read-only):
+  - s[0] = '9' → ❌ error
+
+- Lists are mutable (can be modified):
+  - lst[0] = '9' → ✅ works
+
+- Note: a string is a read-only list of characters
+- Rule of thumb:
+  - If we need to calculate, use numbers
+  - If we need to compare, match, or transform digits, use strings
+
