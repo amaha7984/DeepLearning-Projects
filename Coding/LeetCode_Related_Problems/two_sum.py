@@ -10,3 +10,14 @@ class Solution:
 
             if value in hash and hash[value] != j:
                 return [j, hash[value]]
+
+#---Another solution
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+
+        hashdict = {}
+        for i in range(len(nums)):
+            if target - nums[i] in hashdict:
+                return [i, hashdict[target - nums[i]]]
+            
+            hashdict[nums[i]] = i
