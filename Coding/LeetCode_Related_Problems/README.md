@@ -53,3 +53,9 @@
   - If we need to calculate, use numbers
   - If we need to compare, match, or transform digits, use strings
 
+### Alphanumeric characters
+- Chacters inclusive from A - Z, a - z, 0 - 9
+- In python, we can access the Ascii value of any characters with ord(c), where c is any character
+- To determine if any character is alphanumeric, we can do return the boolean value of: 
+- (ord('A') <= ord(c) <= ord('Z') or ord('a') <= ord(c) <= ord('z') or ord('0') <= ord(c) <= ord('9'))
+
