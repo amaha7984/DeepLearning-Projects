@@ -8,6 +8,11 @@
 - hashmap.keys()
 - hashmap.values()
 - hashmap.items()
+#### Sorting Hashmaps with keys or values
+- Sorting in descending order with keys, let's say h_map is a hashmap or dictionary
+  - sorted(h_map.items(), key=lambda x: x[0], reverse=True) 
+- Sorting in descending order with values, let's say h_map is a hashmap or dictionary
+  - sorted(h_map.items(), key=lambda x: x[1], reverse=True) 
 
 ### Hash Set
 - Hash Set is a data structure that stores unique elements in an unordered manner
