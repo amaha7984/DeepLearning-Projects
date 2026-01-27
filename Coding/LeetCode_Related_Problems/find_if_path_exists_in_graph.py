@@ -14,17 +14,18 @@ class Solution:
         seen = set()
         seen.add(source)
 
-        def dfs(i):
-            if i == destination:
+        stack = [source]
+
+        while stack:
+            node = stack.pop()
+
+            if node == destination:
                 return True
 
-            for nei in graph[i]:
+            for nei in graph[node]:
                 if nei not in seen:
                     seen.add(nei)
-                    if dfs(nei):
-                        return True
-            return False
-        
-        return dfs(source)
-        
+                    stack.append(nei)
+
+        return False
         
