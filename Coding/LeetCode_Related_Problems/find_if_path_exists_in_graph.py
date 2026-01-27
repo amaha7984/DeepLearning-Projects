@@ -1,6 +1,7 @@
 """
 1971. Find if Path Exists in Graph
 """
+from collections import deque
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
         if source == destination:
@@ -14,10 +15,11 @@ class Solution:
         seen = set()
         seen.add(source)
 
-        stack = [source]
+        d = deque()
+        d.append(source)
 
-        while stack:
-            node = stack.pop()
+        while d:
+            node = d.popleft()
 
             if node == destination:
                 return True
@@ -25,7 +27,7 @@ class Solution:
             for nei in graph[node]:
                 if nei not in seen:
                     seen.add(nei)
-                    stack.append(nei)
+                    d.append(nei)
 
         return False
         
