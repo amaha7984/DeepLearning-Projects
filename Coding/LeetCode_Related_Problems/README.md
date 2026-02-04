@@ -25,6 +25,7 @@
   - let's say a hasset, hset = set([1, 2, 3, 3, 4])
   - Addition with 'hset.add(5)'
   - Removable with 'hset.remove(2)'
+- We can look up item in hash set in constant time.
 
 ### Similarities with String and a List:
 - In Python, strings and lists support many of the same operations (indexing, len(), loops, slicing).
