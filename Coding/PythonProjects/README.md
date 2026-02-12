@@ -84,6 +84,13 @@ See "lists.py" for all loops' functionalities
 ### Where to find packages
 - [PyPI](https://pypi.org/)
 - [awesome-python](https://github.com/vinta/awesome-python)
+
+## Sorting in Python
+
+### Sorting a List
+- For a given list, nums:
+- If we want to sort the list and create a copy of the list, we can do: nums = sorted(nums)
+- If we want to modify the list by sorting it, we can do: nums.sort(). This is in place sorting.
     
 
 
