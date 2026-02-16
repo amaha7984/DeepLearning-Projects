@@ -24,7 +24,24 @@ class Solution:
 
         return "".join(s)
     
+#-----------------------Stack Solution---------------------------------------#
+class Solution:
+    def removeDuplicates(self, s: str) -> str:
+        if len(s) <= 1:
+            return s
 
+        stk = []
+        stk.append(s[0])
+
+        for i in range(1, len(s)):
+            if stk and stk[-1] == s[i]:
+                stk.pop()
+            else:
+                stk.append(s[i])
+
+        return "".join(stk)
+
+            
 
             
 
