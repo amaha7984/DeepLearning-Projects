@@ -65,3 +65,8 @@
 - To determine if any character is alphanumeric, we can do return the boolean value of: 
 - (ord('A') <= ord(c) <= ord('Z') or ord('a') <= ord(c) <= ord('z') or ord('0') <= ord(c) <= ord('9'))
 
+### Loop in python
+- A pointer/index variable can take any integer value (even beyond the list size). An error occurs only when you access the list using an invalid index.
+- Loop conditions (e.g., while r < len(nums)) prevent out-of-bounds access.
+- Incrementing or decrementing a pointer itself never causes an error — indexing does.
+
