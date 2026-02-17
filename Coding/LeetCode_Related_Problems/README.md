@@ -66,7 +66,11 @@
 - (ord('A') <= ord(c) <= ord('Z') or ord('a') <= ord(c) <= ord('z') or ord('0') <= ord(c) <= ord('9'))
 
 ### Loop in python
+#### 'Index out of bounds' error
 - A pointer/index variable can take any integer value (even beyond the list size). An error occurs only when you access the list using an invalid index.
 - Loop conditions (e.g., while r < len(nums)) prevent out-of-bounds access.
 - Incrementing or decrementing a pointer itself never causes an error — indexing does.
-
+#### Using negative indices in a list
+- In Python, negative indexing starts from the end of the list, and it starts counting from 1 (not 0).
+- For example: a = [1, 2, 3]
+- a[-1] = 3 → last element; a[-2] = 2; a[-3] = 1
