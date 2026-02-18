@@ -101,6 +101,24 @@ def pre_order_iterative(node):
 - Level Order Traversal
 - We can use queue 
 - Queue can be intialized as: from collections import deque, then q = deque()
+- Example of BFS with Deque
+```bash
+from collections import deque
+def level_order(node):
+    q = deque()
+    q.append(node)
+
+    while q:
+        node = q.popleft()
+        print(node)
+        if node.left:
+            q.append(node.left)
+        
+        if node.right:
+            q.append(node.right)      
+```
+
+
 
 #### Binary Search Trees
 - Complete and perfect binary tree
