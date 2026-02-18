@@ -70,7 +70,39 @@
 - A pointer/index variable can take any integer value (even beyond the list size). An error occurs only when you access the list using an invalid index.
 - Loop conditions (e.g., while r < len(nums)) prevent out-of-bounds access.
 - Incrementing or decrementing a pointer itself never causes an error — indexing does.
-#### Using negative indices in a list
+#### Using negative indexing in a list
 - In Python, negative indexing starts from the end of the list, and it starts counting from 1 (not 0).
 - For example: a = [1, 2, 3]
 - a[-1] = 3 → last element; a[-2] = 2; a[-3] = 1
+
+### Binary Trees
+
+#### Depth First Search
+- Prioritize Depth; we can use either recursion or stack
+- stack can be intialized as a list i.e., []. Also, we can use popleft to pop item from left size of the list or can be also used pop only, which will pop the immediate item. 
+- Preorder Traversal: Node, Left, Right
+- Inorder Traversal: Left, Node, Right
+- Postorder Traversal: Left, Right, Node
+- Example of Preorder Traversal with Stack 
+```bash
+def pre_order_iterative(node):
+    stk = [node]
+    while stk:
+        node = stk.pop()
+        print(node)
+        if node.right:
+           stk.append(node.right)
+        if node.left:
+           stk.append(node.left)
+       
+```
+
+#### Breadth First Search
+- Level Order Traversal
+- We can use queue 
+- Queue can be intialized as: from collections import deque, then q = deque()
+
+#### Binary Search Trees
+- Complete and perfect binary tree
+- For a given node, all values in the left of the node are smaller than itself and the values on the right of the nodes are greater than the node's value
+- It is O(log n) to search an item in a binary search tree if is height balanced
