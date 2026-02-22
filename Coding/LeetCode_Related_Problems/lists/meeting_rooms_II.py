@@ -31,7 +31,7 @@ class Solution:
 
         for start, end in intervals:
  
-            if heap and (heap[0] < start):
+            if heap and (heap[0] <= start): # The interval time is treated like: [start, end)
                 heapq.heappop(heap)
             heapq.heappush(heap, end)
         
