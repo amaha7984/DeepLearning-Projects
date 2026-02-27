@@ -12,6 +12,13 @@
 It combines:
     - Quantization (store the base model in low precision, like 4-bit)
     - LoRA adapters (small trainable matrices)
+- Continual learning:
+Training a model sequentially on new tasks or new data without forgetting what it previously learned.
+Example:
+    - Train model on Task A
+    - Later train on Task B
+    - Model should perform well on both A and B
+
 
 
 
