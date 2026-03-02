@@ -19,6 +19,15 @@ Example:
     - Later train on Task B
     - Model should perform well on both A and B
 
+### Optimization Algorithms
+#### Gradient Descent:
+-	Gradient descent is an iterative optimization algorithm that minimizes a loss function by updating parameters (weights) in the negative direction of the gradient, 
+where the gradient is the derivative of the loss with respect to the parameters. The update is controlled by the learning rate.
+-	Update rule: w = w – η ∇L, 
+Where: w = weights, η = learning rate, ∇L = gradient
+
+
+
 
 
 
