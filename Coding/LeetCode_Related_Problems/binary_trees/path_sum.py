@@ -40,3 +40,7 @@ class Solution:
 
         return (self.hasPathSum(root.left, targetSum - root.val) or
                 self.hasPathSum(root.right, targetSum - root.val))        
+    
+
+# Time complexity, for both cases: O(n)
+# Space Complexity, for both cases: O(h). If it is height-balanced tree, then O(log n). If it is skewed, then it is O(n).
