@@ -124,3 +124,4 @@ def level_order(node):
 - Complete and perfect binary tree
 - For a given node, all values in the left of the node are smaller than itself and the values on the right of the nodes are greater than the node's value
 - It is O(log n) to search an item in a binary search tree if is height balanced
+- A binary tree is *height-balanced* if: For every node in the tree, he height difference between its left and right subtree is at most 1.
