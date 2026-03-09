@@ -31,6 +31,8 @@ class Solution:
         return out
                    
         
+# Time Complexity: DFS will run exactly once for each node, so, O(n)
+# Space Complexity: We are using stack.  O(n) if th tree is skewed or O(log n) if the tree is height balanced
 
 
 
