@@ -26,6 +26,13 @@ where the gradient is the derivative of the loss with respect to the parameters.
 -	Update rule: w = w – η ∇L, 
 Where: w = weights, η = learning rate, ∇L = gradient
 
+#### Batch Gradient Descent → uses full dataset
+
+#### Stochastic Gradient Descent (SGD) → one sample at a time
+
+#### Mini-batch Gradient Descent → small batch (most common in deep learning)
+
+
 
 
 
