@@ -32,6 +32,15 @@ Where: w = weights, η = learning rate, ∇L = gradient
 
 #### Mini-batch Gradient Descent → small batch (most common in deep learning)
 
+#### Momentum: 
+- Momentum accumulates past gradients to create a velocity term, which accelerates learning in consistent directions and reduces oscillations compared to standard gradient descent.
+- Update Rule:
+   - v=βv+∇L
+   - w=w−ηv, 
+   - where  v → called the velocity term (or momentum buffer (accumulated gradients))
+   - β (beta) → called the momentum coefficient (or momentum parameter): controls how much past gradient information is retained
+
+
 
 
 
