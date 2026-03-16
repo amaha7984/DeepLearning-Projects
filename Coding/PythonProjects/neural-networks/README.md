@@ -53,6 +53,8 @@ Where: w = weights, η = learning rate, ∇L = gradient
         - β→ decay rate (usually ~0.9)
         - η→ learning rate
         - ϵ→ small constant for numerical stability
+#### Adam: Adam combines Momentum + RMSProp.
+
 
 
 
