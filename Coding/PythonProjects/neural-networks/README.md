@@ -1,4 +1,4 @@
-# This folder contains the information about beural networks
+# This folder contains the information about neural networks
 
 ### Model Optimization
 - Distillation: Train a smaller model (student) to mimic a larger model (teacher)
