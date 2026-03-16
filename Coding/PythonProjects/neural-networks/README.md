@@ -40,6 +40,21 @@ Where: w = weights, η = learning rate, ∇L = gradient
    - where  v → called the velocity term (or momentum buffer (accumulated gradients))
    - β (beta) → called the momentum coefficient (or momentum parameter): controls how much past gradient information is retained
 
+#### RMSProp: 
+- RMSProp adapts the learning rate per parameter by normalizing the gradient using a moving average of squared gradients, which helps stabilize and speed up convergence.
+- Update Rule:
+	- Compute moving average of squared gradients:
+        - s=βs+(1-β)(∇L)^2
+	- Update Weights
+        - w = w - (η / (math.sqrt(s) + ϵ)) * ∇L
+        
+    - Terms
+        - s→ running average of squared gradients
+        - β→ decay rate (usually ~0.9)
+        - η→ learning rate
+        - ϵ→ small constant for numerical stability
+
+
 
 
 
