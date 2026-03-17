@@ -60,6 +60,17 @@ Where: w = weights, η = learning rate, ∇L = gradient
 - Update Rules:
   - First moment (mean of gradients): m=β_1 m+(1-β_1)∇L
   - Second moment (mean of squared gradients): v=β_2 v+(1-β_2)(∇L)^2
+  - 	Bias correction:
+m ̂=m/(1-β_1^t ),v ̂=v/(1-β_2^t )
+  - Weight update:
+  w=w - (η/(√(v ̂ )+ϵ)) * m ̂
+- 5.	Terms:
+    - η (learning rate) → step size
+    - β₁ → momentum coefficient (first moment, usually 0.9)
+    - β₂ → decay rate for squared gradients (usually 0.999)
+    - ε → small constant for numerical stability (e.g., 1e-8)
+    - t → timestep (iteration number, for bias correction)
+
 
 
 
