@@ -57,6 +57,9 @@ Where: w = weights, η = learning rate, ∇L = gradient
 - Uses moving average of gradients → like Momentum
 - Uses moving average of squared gradients → like RMSProp
 - Adapts learning rate per parameter
+- Update Rules:
+  - First moment (mean of gradients): m=β_1 m+(1-β_1)∇L
+  - Second moment (mean of squared gradients): v=β_2 v+(1-β_2)(∇L)^2
 
 
 
