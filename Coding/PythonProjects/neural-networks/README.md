@@ -54,6 +54,11 @@ Where: w = weights, η = learning rate, ∇L = gradient
         - η→ learning rate
         - ϵ→ small constant for numerical stability
 #### Adam: Adam combines Momentum + RMSProp.
+- Uses moving average of gradients → like Momentum
+- Uses moving average of squared gradients → like RMSProp
+- Adapts learning rate per parameter
+
+
 
 
 
